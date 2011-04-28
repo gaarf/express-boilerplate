@@ -38,7 +38,7 @@
   </script>
 
 <% if(scripts) for (var c = 0; c < scripts.length; c++) { %>
-  <script src="<%= (scripts[c].match(/^(https?:)?\/\//i) ? '' : '/javascripts/') + scripts[c] %>"></script>
+  <script src="<%= (scripts[c].match(/^(https?:)?\//i) ? '' : '/javascripts/') + scripts[c] %>"></script>
 <% } %>
 
 <% if(status!=404) { %>
