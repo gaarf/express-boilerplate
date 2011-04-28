@@ -190,14 +190,23 @@ footer {
 
 #page-404 {
   text-align:center;
-  font-weight:bold;
 }
-#page-404 h2 {
-  font-size: 404px;
-  line-height: 233px;
-  margin-top: 36px;
+#page-404 h1 {
+  position:absolute;
+  left:50%;
+  width:600px;
+  margin:111px 0 0 -300px;
+  z-index: -1;
+  font-size: 300px;
+  line-height: 0;
   color: #EEE;
 }
+#page-404 p.sorry {
+  font-size:20px;
+  font-weight:bold;
+  padding-top:195px;
+}
+
 #page-404 #goog-fixurl {
   text-align:left;
   display:inline-block;
