@@ -1,7 +1,7 @@
-jQuery.ready(function() {
+jQuery(document).ready(function($) {
 
 
-  log('hello world!');
+  log('hello world!', $.fn.jquery);
 
 
 });
