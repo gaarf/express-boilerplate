@@ -1,0 +1,23 @@
+{
+  "author": "AD aka Gaarf (http://gaarf.info)",
+  "name": "express-boilerplate",
+  "description": "A basic Express app with a layout based on HTML5 Boilerplate.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/gaarf/express-boilerplate",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gaarf/express-boilerplate.git"
+  },
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "expresso"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
