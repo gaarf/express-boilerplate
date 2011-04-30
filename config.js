@@ -14,13 +14,15 @@ module.exports = function(app, express) {
 
   var pkg = JSON.parse(require('fs').readFileSync('./package.json'))
     , BASE_VIEW_OPTIONS =
-      { title: 'Express HTML5 Boilerplate'
+      { title: pkg.name
       , meta: { desc: pkg.description
               , version: pkg.version
               , author: parsePerson(pkg.author)
               }
       , jquery: { version: '1.5.2' }
   };
+
+  console.log("Configuring "+pkg.name+" v"+pkg.version+"...");
 
   app.configure(function(){
     app.set('views', __dirname + '/views');
