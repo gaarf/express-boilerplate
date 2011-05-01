@@ -1,7 +1,7 @@
 var express = require('express')
   , app = express.createServer();
 
-module.exports = require('./config.js')(app, express);
+module.exports = require('./config.js').configure(app, express);
 
 if (!module.parent) {
 

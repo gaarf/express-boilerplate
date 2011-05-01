@@ -1,4 +1,4 @@
-module.exports = function(app, BASE_VIEW_OPTIONS) {
+module.exports.setRoutes = function(app, BASE_VIEW_OPTIONS) {
 
   var _ = require('underscore');
 

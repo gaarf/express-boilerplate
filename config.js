@@ -1,18 +1,6 @@
-module.exports = function(app, express) {
+module.exports.configure = function(app, express) {
 
-  function parsePerson(person) {
-    if (typeof person !== "string") return person;
-    var name = person.match(/^([^\(<]+)/)
-      , url = person.match(/\(([^\)]+)\)/)
-      , email = person.match(/<([^>]+)>/)
-      , obj = {};
-    if (name && name[0].trim()) obj.name = name[0].trim();
-    if (email) obj.email = email[1];
-    if (url) obj.href = url[1];
-    return obj;
-  }
-
-  var pkg = JSON.parse(require('fs').readFileSync('./package.json'))
+  var pkg = readJsonFile('./package.json')
     , BASE_VIEW_OPTIONS =
       { title: pkg.name
       , meta: { desc: pkg.description
@@ -42,5 +30,23 @@ module.exports = function(app, express) {
     app.use(express.errorHandler());
   });
 
-  return require('./etc/routes.js')(app,BASE_VIEW_OPTIONS);
+  require('./etc/routes.js').setRoutes(app,BASE_VIEW_OPTIONS);
+
+  return app;
+}
+
+function readJsonFile(file) {
+  return JSON.parse(require('fs').readFileSync(file));
+}
+
+function parsePerson(person) {
+  if (typeof person !== "string") return person;
+  var name = person.match(/^([^\(<]+)/)
+    , url = person.match(/\(([^\)]+)\)/)
+    , email = person.match(/<([^>]+)>/)
+    , obj = {};
+  if (name && name[0].trim()) obj.name = name[0].trim();
+  if (email) obj.email = email[1];
+  if (url) obj.href = url[1];
+  return obj;
 }
