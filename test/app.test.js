@@ -15,8 +15,7 @@ module.exports = {
       { url: '/' },
       { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' }},
       function(res){
-        assert.includes(res.body, '<title>Express');
-        assert.includes(res.body, 'Boilerplate');
+        assert.includes(res.body, 'express-boilerplate');
         assert.includes(res.body, 'window.jQuery || document.write');
         assert.includes(res.body, 'src="/javascripts/client.js"');
       });
