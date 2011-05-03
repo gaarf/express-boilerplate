@@ -10,8 +10,8 @@ A basic [Express](http://expressjs.com/) app with a layout based on [HTML5 Boile
   * Custom 404
   * zomg Google Analytics
 
-#### Includes some amazing libraries:
+#### Includes amazing libraries:
 
   * jQuery
-  * Modernizr
-  * YUI CSS Reset/Fonts
+  * html5shim for IE<9
+  * CSS Reset/Fonts
