@@ -1,2 +1,4 @@
 .DS_Store?
-etc/secret*
+logs/*
+*.log
+node_modules/*
