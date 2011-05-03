@@ -19,8 +19,9 @@
     "node": "*"
   },
   "dependencies": {
-    "express": "*",
-    "underscore": "*"
+    "express": ">=2.3.2",
+    "underscore": ">=1.1.6",
+    "ejs": ">=0.4.1"
   },
   "devDependencies": {
     "expresso": "*"
