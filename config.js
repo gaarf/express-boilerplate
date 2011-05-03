@@ -47,6 +47,6 @@ function parsePerson(person) {
     , obj = {};
   if (name && name[0].trim()) obj.name = name[0].trim();
   if (email) obj.email = email[1];
-  if (url) obj.href = url[1];
+  if (url) obj.url = url[1];
   return obj;
 }

@@ -18,6 +18,9 @@
   "engines": {
     "node": "*"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "*",
+    "underscore": "*"
+  },
   "devDependencies": {}
 }
