@@ -15,7 +15,6 @@ module.exports = {
       { url: '/' },
       { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' }},
       function(res){
-        assert.includes(res.body, 'express-boilerplate');
         assert.includes(res.body, 'window.jQuery || document.write');
         assert.includes(res.body, 'src="/javascripts/client.js"');
       });
@@ -26,7 +25,7 @@ module.exports = {
       { url: '/help' },
       { status: 200 },
       function(res){
-        assert.includes(res.body, 'RTFM');
+        assert.includes(res.body, '<div id="page-help">');
       });
   },
 

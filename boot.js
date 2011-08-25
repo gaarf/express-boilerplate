@@ -12,10 +12,11 @@ module.exports.boot = function(app, express) {
   /**
    * Database
    */
-  var c = secrets.get('db');
-  dbClient.init(c.username, c.password, c.database);
+  // var c = secrets.get('db');
+  // dbClient.init(c.username, c.password, c.database);
 
-  var storage = MysqlStore.create(express, dbClient);
+  // var storage = MysqlStore.create(express, dbClient);
+  var storage = new express.session.MemoryStore();
 
   /**
    * Application namespace
@@ -48,8 +49,8 @@ module.exports.boot = function(app, express) {
        secret: secrets.get('sessionHash')
      }));
 
-     app.use(express.methodOverride());
-     app.use(express.csrf());
+     // app.use(express.methodOverride());
+     // app.use(express.csrf());
 
      app.use(function(req, res, next) {
        res.locals(
@@ -84,10 +85,10 @@ module.exports.boot = function(app, express) {
   /**
   * Models
   */
-  fs.readdirSync('./models').forEach(function(file){
-    var model = require('./models/' + file);
-    app.STUFF.model[model.def.name] = model.get(app);
-  });
+  // fs.readdirSync('./models').forEach(function(file){
+  //   var model = require('./models/' + file);
+  //   app.STUFF.model[model.def.name] = model.get(app);
+  // });
 
   /**
    * Routes
@@ -100,7 +101,7 @@ module.exports.boot = function(app, express) {
    * Custom 404
    */
   app.use(function(req, res) {
-    res.render('404', { status: 404 } );
+    res.render('404', { status: 404, jquery: false } );
   });
 
   return app;
