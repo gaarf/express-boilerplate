@@ -5,7 +5,14 @@ A basic [Express](http://expressjs.com/) app with a layout based on [HTML5 Boile
 #### Improvements over Express scaffolding:
 
   * Clean app.js
-  * Separate routes.js file
+  * Multiple controllers
+  * Console
+
+### Commented out stuff that can useful:
+  * a Model template
+  * MysqlStore
+
+### Pre hooked-up goodies:
   * Favicon
   * Custom 404
   * zomg Google Analytics
