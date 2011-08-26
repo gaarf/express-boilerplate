@@ -86,15 +86,19 @@ module.exports.boot = function(app, express) {
   * Models
   */
   // fs.readdirSync('./models').forEach(function(file){
-  //   var model = require('./models/' + file);
-  //   app.STUFF.model[model.def.name] = model.get(app);
+  //   if(file.match(/\.js$/)) {
+  //     var model = require('./models/' + file);
+  //     app.STUFF.model[model.def.name] = model.get(app);
+  //   }
   // });
 
   /**
    * Routes
    */
   fs.readdirSync('./controllers').forEach(function(file){
-    require('./controllers/' + file).setRoutes(app, express);
+    if(file.match(/\.js$/)) {
+      require('./controllers/' + file).setRoutes(app, express);
+    }
   });
 
   /**
