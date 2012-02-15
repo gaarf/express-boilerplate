@@ -1,0 +1,25 @@
+{
+  "name": "mongo-express",
+  "author": "gaarf (/humans.txt)",
+  "description": "Mongo/Express boilerplate",
+  "version": "0.0.1",
+  "main": "boot.js",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "express": ">=2.5.8",
+    "ejs": ">=0.4.1",
+
+    "mongoose": "*",
+    "connect-session-mongo": "*",
+    "mongoose-auth": "*",
+
+    "underscore": ">=1.1.6",
+    "dateformat": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  }
+}

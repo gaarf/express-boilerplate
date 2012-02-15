@@ -1,0 +1,32 @@
+<h1 style="padding-bottom:2em">Login to <%= meta.title %></h1>
+
+<div class="row">
+<div class="span9">
+
+  <form action="/login" method="post" accept-charset="utf-8" class="form-horizontal">
+    <input type="hidden" name="_csrf" value="<%= req.session._csrf %>" />
+
+    <%- partial('bootstrap/_input', { field:'login', label:'Username', model:null}) %>
+    <%- partial('bootstrap/_input', { field:'password', label:'Password', model:null}) %>
+
+    <div class="form-actions"><input type="submit" value="Submit" class="btn btn-primary" /></div>
+  </form>
+
+</div>
+<div class="span3 text-right">
+
+  <p>Don't have an account yet?<br>
+    <a href="/register">Register today</a>.</p>
+
+  <h6>or login via 3rd-party</h6>
+
+  <div class="btn-group pull-right">
+     <a class="btn" href="/auth/twitter">Twitter</a>
+     <a class="btn" href="/auth/facebook">Facebook</a>
+  </div>
+
+</div>
+</div>
+
+
+<%- partial('_err2msg') %>

@@ -1,0 +1,41 @@
+/* TEAM */
+  Development: ADrien aka Gaarf
+  Site: http://gaarf.info
+  Twitter: @gaarf
+
+/* BACKEND */
+  Node: http://nodejs.org/
+  MongoDB: http://www.mongodb.org/
+  Mongoose: http://mongoosejs.com/
+  Express: http://expressjs.com/
+  Underscore: http://documentcloud.github.com/underscore/
+
+/* FRONTEND */
+  jQuery Mobile: http://jquerymobile.com/
+  Bootstrap: http://twitter.github.com/bootstrap/
+
+
+                                    
+                               -o/-                       
+                               +oo//-                     
+                              :ooo+//:                    
+                             -ooooo///-                   
+                             /oooooo//:                   
+                            :ooooooo+//-                  
+                           -+oooooooo///-                 
+           -://////////////+oooooooooo++////////////::    
+            :+ooooooooooooooooooooooooooooooooooooo+:::-  
+              -/+ooooooooooooooooooooooooooooooo+/::////:-
+                -:+oooooooooooooooooooooooooooo/::///////:-
+                  --/+ooooooooooooooooooooo+::://////:-   
+                     -:+ooooooooooooooooo+:://////:--     
+                       /ooooooooooooooooo+//////:-        
+                      -ooooooooooooooooooo////-           
+                      /ooooooooo+oooooooooo//:            
+                     :ooooooo+/::/+oooooooo+//-           
+                    -oooooo/::///////+oooooo///-          
+                    /ooo+::://////:---:/+oooo//:          
+                   -o+/::///////:-      -:/+o+//-         
+                   :-:///////:-            -:/://         
+                     -////:-                 --//:        
+                       --                       -:        

@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title><%= page.title ? meta.title + " / " + page.title : meta.title %></title>
+
+  <meta name="description" content="<%= meta.desc %>">
+  <meta name="author" content="<%= meta.author.name %>">
+  <link type="text/plain" rel="author" href="<%= meta.author.url %>" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+<% if(bootstrap) { %>
+  <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/style.css">
+<% } %>
+
+<% for(var i=0, m=stylesheets.length; i < m; i++) { %>
+  <link rel="stylesheet" href="<%= stylesheets[i] %>">
+<% } %>
+
+  <script>
+  window.CLIENTAPP = {
+    genTime: <%= Date.now() %>,
+    onload: []
+  };
+  </script>
+
+</head>
+
+<body class="<%= page.className + (bootstrap?' bootstrap':'') %>">
+
+  <% if(bootstrap) { %>
+    <%- partial('bootstrap/_navbar') %>
+  <% } %>
+
+  <div class="container">
+
+    <div class="content" id="main">
+      <!-- #messages -->
+      <%- body %>
+    </div>
+
+    <% if(bootstrap) { %>
+      <%- partial('bootstrap/_footer') %>
+    <% } %>
+
+  </div>
+
+<% if(jquery) { %>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="/libs/jquery-1.7.1.min.js"><\/script>')</script>
+  <script>
+    $.ajaxSetup({ cache: false, data: { _csrf: "<%= req.session._csrf %>" } });
+  </script>
+<% } %>
+<% if(jquery && bootstrap) { %>
+  <script src="/libs/bootstrap/js/bootstrap.js"></script>
+<% } %>
+
+  <script> // flash messages
+  (function(all) {
+
+    if(new Date() - new Date(CLIENTAPP.genTime) > 10000) {
+      return; // 10 seconds since genTime - probably back btn nav - dont show messages again
+    }
+
+    var $c = false;
+
+    if(window.jQuery && $('body').is('.bootstrap')) {
+      $c = $('#messages');
+      if(!$c.size()) {
+        $c = $('<div id="messages" />').prependTo('#main.content');
+      }
+    }
+
+    window.flashMessage = function(type, msg, noclear) {
+      if($c) {
+        if(!noclear) {
+          $c.empty();
+        }
+        $c.append(
+          $('<div class="alert fade in"></div>')
+            .text(msg)
+            .append('<a class="close" href="#" data-dismiss="alert">×</a>')
+            .addClass('alert-'+type)
+            .alert() // bootstrap-alerts.js
+        );
+      }
+      else {
+        alert('['+type+'] '+msg);
+      }
+    }
+
+    for (var type in all) {
+      var msgs = all[type];
+      for (var i=0; i < msgs.length; i++) {
+        flashMessage(type, msgs[i], true);
+      };
+    };
+
+    // messages can be stored locally to be displayed after a page refresh...
+    var domStore = JSON && JSON.stringify && window.localStorage, // browser must be modern!
+        KEY = 'flash';
+
+    window.storeFlashMessage = function(type, msg) {
+      if(domStore) {
+        var str = domStore.getItem(KEY),
+            set = str ? JSON.parse(str) : [];
+        set.push({type:type, msg:msg});
+        domStore.removeItem(KEY); // workaround QUOTA_EXCEEDED_ERR
+        domStore.setItem(KEY, JSON.stringify(set));
+      }
+      else {
+        flashMessage(type, msg);
+      }
+    }
+
+    if(domStore) {
+      var str = domStore.getItem(KEY),
+          set = str ? JSON.parse(str) : [];
+      for (var i=0; i < set.length; i++) {
+        flashMessage(set[i].type, set[i].msg, true);
+      };
+      domStore.removeItem(KEY);
+    }
+
+  })(<%- JSON.stringify(req.flash()) %>);
+  </script>
+
+  <% for(var i=0, m=scripts.length; i < m; i++) { %>
+    <script src="<%= scripts[i] %>"></script>
+  <% } %>
+
+  <script>
+    (function(o) {
+      for (var i=0, m=o.length; i < m; i++) {
+        o[i].call();
+      };
+    })(CLIENTAPP.onload);
+  </script>
+
+</body>
+</html>

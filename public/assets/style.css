@@ -1,0 +1,39 @@
+/* convenience */
+.text-right {
+  text-align:right;
+}
+.text-center {
+  text-align:center;
+}
+.reset-margins {
+  margin:0;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: "."; 
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.clearfix:after {clear: both;}
+.clearfix {zoom: 1;} /* IE < 8 */
+
+
+/* fixed footer */
+body.bootstrap footer {
+  border-top:1px solid #EEE;
+  background-color:white;
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  text-align:center;
+}
+body.bootstrap footer p {
+  margin:2px;
+  text-align:center;
+}
+
+
+/* more styles... */

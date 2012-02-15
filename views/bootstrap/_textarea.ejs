@@ -1,0 +1,25 @@
+<% 
+  var id = id || (page.className ? page.className.split(' ')[0] + '-' : '') + 'textarea-' + field,
+      value = (req.body && req.body[field]) || (model && model.get(field)) || '',
+      error = req.body && errors[field];
+%>
+
+<div class="control-group<%= error ? ' error' : '' %>">
+
+  <label for="<%= id %>"><%= label %></label>
+
+  <div class="controls">
+
+    <textarea class="" 
+       id="<%= id %>"
+       name="<%= field %>"
+       ><%= value %></textarea>
+
+
+<% if(error) { %>
+      <span class="help-inline"><%= error %></span>
+<% } %>
+
+  </div>
+
+</div>

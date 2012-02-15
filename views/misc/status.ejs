@@ -1,0 +1,10 @@
+<div class="hero-unit text-center">
+  <p>oops!</p>
+  <h1><%= statusText %></h1>
+</div>
+
+
+<p class="text-center">
+  <code>HTTP/<strong><%= status %></strong></code> in response to <code><%= req.method + ' ' + req.url %></code>
+</p>
+<pre><%= JSON.stringify(req.headers) %></pre>

@@ -1,0 +1,23 @@
+<% 
+  var id = id || (page.className ? page.className.split(' ')[0] + '-' : '') + 'input-' + field,
+      value = (req.body && req.body[field]) || (model && model.get(field)) || '',
+      error = req.body && errors[field];
+%>
+
+<div class="control-group clearfix<%= error ? ' error' : '' %>">
+
+  <label class="control-label" for="<%= id %>"><%= label %></label>
+
+  <div class="controls">
+    <input class="span4" 
+       id="<%= id %>"
+       name="<%= field %>"
+       type="<%= field=='password' ? 'password' : 'text' %>"
+       value="<%= value %>" />
+
+<% if(error) { %>
+    <span class="help-inline"><%= error %></span>
+<% } %>
+  </div>
+
+</div>
