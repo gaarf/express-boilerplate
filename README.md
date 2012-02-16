@@ -1,11 +1,12 @@
 # express-boilerplate
 
-A basic [Express](http://expressjs.com/) setup, hooked up with [mongoose-auth](https://github.com/bnoguchi/mongoose-auth/) and [Bootstrap](http://twitter.github.com/bootstrap/)
+A basic [Express](http://expressjs.com/) setup, hooked up with [mongoose-auth](https://github.com/bnoguchi/mongoose-auth/) and [Bootstrap](http://twitter.github.com/bootstrap/).
 
 ## to install:
 
 ### fetch dependencies
 ```$ brew install mongodb```
+
 ```$ npm i --link```
 
 ### rename (and maybe edit) secrets file
