@@ -1,0 +1,10 @@
+<script type="text/javascript" charset="utf-8">
+  CLIENTAPP.onload.push(function() {
+
+    if(<%= JSON.stringify(req.loggedIn)%>) {
+      storeFlashMessage('info', 'you are already logged in!');
+      location.replace('/');
+    }
+
+  });
+</script>
