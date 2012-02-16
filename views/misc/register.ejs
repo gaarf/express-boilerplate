@@ -1,0 +1,16 @@
+<h1 style="padding-bottom:2em">Register for an account on <%= meta.title %></h1>
+
+
+
+<form action="/register" method="post" accept-charset="utf-8" class="form-horizontal">
+  <input type="hidden" name="_csrf" value="<%= req.session._csrf %>" />
+
+  <%- partial('bootstrap/_input', { field:'login', label:'Username', model:null}) %>
+  <%- partial('bootstrap/_input', { field:'password', label:'Password', model:null}) %>
+
+  <div class="form-actions"><input type="submit" value="Submit" class="btn btn-primary" /></div>
+</form>
+
+
+
+<%- partial('_err2msg') %>

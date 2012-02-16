@@ -1,0 +1,40 @@
+<% 
+  var error = req.body && errors[field],
+      value = (req.body && req.body[field]) || (model && model.get(field));
+%>
+
+<div class="control-group<%= error ? ' error' : '' %>">
+
+  <label><%= label %></label>
+
+  <div class="controls">
+
+    <label class="inline radio">
+      <input
+         name="<%= field %>"
+         type="radio"
+         <% if(value=='1') { %>
+           checked="checked"
+         <% } %>
+         value="1" />
+      <span>Yes</span>
+    </label>
+
+    <label class="inline radio">
+      <input
+         name="<%= field %>"
+         type="radio"
+         <% if(value=='0') { %>
+           checked="checked"
+         <% } %>
+         value="0" />
+      <span>No</span>
+    </label>
+
+<% if(error) { %>
+    <span class="help-inline" style="margin-left:2em"><%= error %></span>
+<% } %>
+
+  </div>
+
+</div>
