@@ -11,7 +11,7 @@ describe('With server listening', function(){
 
     it('responds ok', function(done){
       helper.localRequest('GET /', function(res) {
-        res.statusCode.should.equal(200);
+        res.should.have.status(200);
         res.body.should.include('is running fine');
         done();
       })
@@ -19,11 +19,23 @@ describe('With server listening', function(){
 
   })
 
+  // describe('page that causes an error', function(){
+  // 
+  //   it('shows express error page', function(){
+  //     helper.localRequest('GET /bad', function(res) {
+  //       res.should.have.status(500);
+  //       res.body.should.include('omgWtfBbq is not defined');
+  //       done();
+  //     })
+  //   })
+  // 
+  // })
+
   describe('page that does not exist', function(){
   
     it('is not found', function(){
       helper.localRequest('POST /four.ofour', function(res) {
-        res.statusCode.should.equal(404);
+        res.should.have.status(404);
         done();
       })
     })

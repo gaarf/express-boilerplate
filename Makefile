@@ -1,5 +1,8 @@
+mongod:
+	mongod run --config /usr/local/etc/mongod.conf
+
 test:
-	mocha --reporter list
+	mocha --reporter spec
 
 server:
 	node boot.js
@@ -7,4 +10,4 @@ server:
 routes:
 	node console.js routes
 
-.PHONY: test routes
+.PHONY: mongod test server routes

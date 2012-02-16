@@ -63,7 +63,7 @@ _.forEach(fs.readdirSync('./models'), function(file){
   if(file.match(/\.js$/)) {
     var s = require('./models/' + file);
     if(s.name) {
-      schemas[s.name] = s.get(mongoose)
+      schemas[s.name] = s.get(mongoose);
     }
   }
 });
@@ -133,6 +133,8 @@ _.forEach(schemas, function(schema, name){
    app.use(express.csrf());
 
    app.use(mongooseAuth.middleware());
+   
+   app.use(app.router); // cf https://github.com/bnoguchi/mongoose-auth/issues/52
 });
 
 app.configure('development', function(){

@@ -14,6 +14,11 @@ module.exports.setRoutes = function(app, kit) {
     res.json(req.user);
   });
 
+
+  app.get('/bad', function(req, res){
+    omgWtfBbq(); // undefined
+  });
+
   return app;
 }
 
