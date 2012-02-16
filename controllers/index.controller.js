@@ -9,11 +9,9 @@ module.exports.setRoutes = function(app, kit) {
     });
   });
 
-
   app.get('/account', kit.middleware.redirIfNotLoggedIn, function(req, res) {
     res.json(req.user);
   });
-
 
   app.get('/bad', function(req, res){
     omgWtfBbq(); // undefined

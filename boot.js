@@ -1,12 +1,7 @@
 /**
- * Express
- */
-var express = require('express'),
-    app = express.createServer(),
-
-/**
  * std libs
  */
+ var express = require('express'),
     _ = require('underscore'),
     fs = require('fs'),
 
@@ -85,6 +80,8 @@ _.forEach(schemas, function(schema, name){
 /**
  * Connect
  */
+ var app = express.createServer();
+
  app.configure('development', function(){
    if(!module.parent) {
      // app.use(express.profiler());
@@ -132,8 +129,17 @@ _.forEach(schemas, function(schema, name){
    app.use(express.methodOverride());
    app.use(express.csrf());
 
+   // app.use(function(req, res, next) {
+   //   var s = req.url.match(/^\/auth\/(\w+)\/callback/),
+   //       a = req.session && req.session.auth;
+   //   if(s && !(a && a[s[1]])) {
+   //     kit.middleware.badRequest(req, res);
+   //   }
+   //   next();
+   // });
+
    app.use(mongooseAuth.middleware());
-   
+
    app.use(app.router); // cf https://github.com/bnoguchi/mongoose-auth/issues/52
 });
 
@@ -168,6 +174,11 @@ app.use(kit.middleware.fourOhFour);
 // --------------------------------------------------------------------------------------
 
 if(!module.parent) {
+
+  process.on('uncaughtException', function (exception) {
+    console.error('uncaughtException', exception);
+  });
+
   app.listen(process.env['NODE_ENV']=='production' ? 80 : 3000, function() {
     console.log("%s - Listening on port %d in %s mode", (new Date()).toISOString(), app.address().port, app.settings.env);
   });
