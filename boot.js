@@ -129,15 +129,6 @@ _.forEach(schemas, function(schema, name){
    app.use(express.methodOverride());
    app.use(express.csrf());
 
-   // app.use(function(req, res, next) {
-   //   var s = req.url.match(/^\/auth\/(\w+)\/callback/),
-   //       a = req.session && req.session.auth;
-   //   if(s && !(a && a[s[1]])) {
-   //     kit.middleware.badRequest(req, res);
-   //   }
-   //   next();
-   // });
-
    app.use(mongooseAuth.middleware());
 
    app.use(app.router); // cf https://github.com/bnoguchi/mongoose-auth/issues/52
@@ -176,7 +167,10 @@ app.use(kit.middleware.fourOhFour);
 if(!module.parent) {
 
   process.on('uncaughtException', function (exception) {
-    console.error('uncaughtException', exception);
+    // danger! see https://github.com/joyent/node/issues/2582
+    console.error('uncaughtException');
+    // doing it because everyauth callback endpoint crashes with missing session
+    console.log(exception);
   });
 
   app.listen(process.env['NODE_ENV']=='production' ? 80 : 3000, function() {
