@@ -7,7 +7,4 @@ test:
 server:
 	node boot.js
 
-routes:
-	node console.js routes
-
-.PHONY: mongod test server routes
+.PHONY: mongod test server

@@ -168,9 +168,8 @@ if(!module.parent) {
 
   process.on('uncaughtException', function (exception) {
     // danger! see https://github.com/joyent/node/issues/2582
-    console.error('uncaughtException');
+    console.error("\nuncaughtException", exception);
     // doing it because everyauth callback endpoint crashes with missing session
-    console.log(exception);
   });
 
   app.listen(process.env['NODE_ENV']=='production' ? 80 : 3000, function() {
