@@ -2,7 +2,7 @@ mongod:
 	mongod run --config /usr/local/etc/mongod.conf
 
 test:
-	npm run-script test
+	node_modules/.bin/mocha --reporter spec
 
 server:
 	node boot.js
