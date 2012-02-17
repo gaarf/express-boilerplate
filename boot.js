@@ -14,7 +14,7 @@
 /**
  * pkg info
  */
-    pkg = JSON.parse(fs.readFileSync('./package.json')),
+    pkg = require('./package.json'),
     pkgAuthor = libMisc.parsePerson(pkg.author);
 
 console.log("BOOTING UP "+pkg.name+" v"+pkg.version+" / node v"+process.versions.node+"...");
@@ -169,7 +169,6 @@ if(!module.parent) {
   process.on('uncaughtException', function (exception) {
     // danger! see https://github.com/joyent/node/issues/2582
     console.error("\nuncaughtException", exception);
-    // doing it because everyauth callback endpoint crashes with missing session
   });
 
   app.listen(process.env['NODE_ENV']=='production' ? 80 : 3000, function() {
