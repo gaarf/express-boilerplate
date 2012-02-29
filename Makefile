@@ -5,6 +5,6 @@ test:
 	./node_modules/.bin/mocha --reporter spec
 
 server:
-	node boot.js
+	@@node server.js
 
 .PHONY: mongod test server

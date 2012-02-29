@@ -8,6 +8,11 @@ var SECRETS = {
 
   sessionHash: 'HELLOWORLD',
 
+  mongoUrls: {
+    data: 'mongodb://localhost/',
+    sess: 'mongodb://localhost/boilerplate-sessions'
+  },
+
   everyAuth: {
       fb: {
           appId: '111565172259433'

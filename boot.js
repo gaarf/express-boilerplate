@@ -32,11 +32,15 @@ var kit = {
   middleware: libMiddleware.base
 };
 
+var m = kit.secrets.get('mongoUrls'),
+  MONGO_SESS_URL = m.sess + (m.sess.charAt(m.sess.length-1)=='/' ? pkg.name + '-sess' : ''),
+  MONGO_DATA_URL = m.data + (m.data.charAt(m.data.length-1)=='/' ? pkg.name + '-data' : '');
+
 /**
  * Sessions
  */
-var MongoStore = require('connect-session-mongo');
-kit.sessionStorage = new MongoStore({ db: pkg.name+'-sessions' });
+var MongoStore = require('connect-mongodb');
+kit.sessionStorage = new MongoStore({ url: MONGO_SESS_URL });
 
 kit.middleware.session = express.session({
   store: kit.sessionStorage,
@@ -49,7 +53,7 @@ kit.middleware.session = express.session({
  * Mongo ODM
  */
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/'+pkg.name);
+mongoose.connect(MONGO_DATA_URL);
 
 
 /**
