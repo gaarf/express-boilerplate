@@ -9,7 +9,7 @@ var SECRETS = {
   sessionHash: 'HELLOWORLD',
 
   mongoUrls: {
-    data: 'mongodb://localhost/',
+    data: 'mongodb://localhost/', // ends with slash = we append dbname based on pkg.name
     sess: 'mongodb://localhost/boilerplate-sessions'
   },
 

@@ -1,6 +1,6 @@
 # express-boilerplate
 
-A basic [Express](http://expressjs.com/) setup, hooked up with [mongoose-auth](https://github.com/bnoguchi/mongoose-auth/) and [Bootstrap](http://twitter.github.com/bootstrap/).
+A basic [Express](http://expressjs.com/) setup, hooked up with [mongoose-auth](https://github.com/bnoguchi/mongoose-auth/) and [Bootstrap](http://twitter.github.com/bootstrap/). Includes configuration files for deployment on [dotCloud](https://www.dotcloud.com/).
 
 ## to install:
 
@@ -22,4 +22,3 @@ $ ```node boot.js```
 
 ## to run tests:
 $ ```make test```
-
