@@ -1,3 +1,5 @@
+var IS_PROD = process.env['NODE_ENV']=='production';
+
 /**
  * std libs
  */
@@ -164,19 +166,23 @@ app.use(kit.middleware.fourOhFour);
 
 // --------------------------------------------------------------------------------------
 
-if(!module.parent) {
-
+function up() {
   process.on('uncaughtException', function (exception) {
     // danger! see https://github.com/joyent/node/issues/2582
     console.error("\nuncaughtException", exception);
   });
 
-  app.listen(process.env['NODE_ENV']=='production' ? 80 : 3000, function() {
+  app.listen(IS_PROD ? 8080 : 3000, function() {
     console.log("%s - Listening on port %d in %s mode", (new Date()).toISOString(), app.address().port, app.settings.env);
   });
 }
 
+if(!module.parent) {
+  up();
+}
+
 module.exports = {
+  up: up,
   app:app,
   kit:kit
 }
