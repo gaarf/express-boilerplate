@@ -8,6 +8,11 @@ var SECRETS = {
 
   sessionHash: 'HELLOWORLD',
 
+  mongoUrls: {
+    data: 'mongodb://localhost/', // ends with slash = we append dbname based on pkg.name
+    sess: 'mongodb://localhost/boilerplate-sessions'
+  },
+
   everyAuth: {
       fb: {
           appId: '111565172259433'

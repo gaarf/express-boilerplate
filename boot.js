@@ -1,3 +1,5 @@
+var IS_PROD = process.env['NODE_ENV']=='production';
+
 /**
  * std libs
  */
@@ -30,11 +32,15 @@ var kit = {
   middleware: libMiddleware.base
 };
 
+var m = kit.secrets.get('mongoUrls'),
+  MONGO_SESS_URL = m.sess + (m.sess.charAt(m.sess.length-1)=='/' ? pkg.name + '-sess' : ''),
+  MONGO_DATA_URL = m.data + (m.data.charAt(m.data.length-1)=='/' ? pkg.name + '-data' : '');
+
 /**
  * Sessions
  */
-var MongoStore = require('connect-session-mongo');
-kit.sessionStorage = new MongoStore({ db: pkg.name+'-sessions' });
+var MongoStore = require('connect-mongodb');
+kit.sessionStorage = new MongoStore({ url: MONGO_SESS_URL });
 
 kit.middleware.session = express.session({
   store: kit.sessionStorage,
@@ -47,7 +53,7 @@ kit.middleware.session = express.session({
  * Mongo ODM
  */
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/'+pkg.name);
+mongoose.connect(MONGO_DATA_URL);
 
 
 /**
@@ -164,19 +170,23 @@ app.use(kit.middleware.fourOhFour);
 
 // --------------------------------------------------------------------------------------
 
-if(!module.parent) {
-
+function up() {
   process.on('uncaughtException', function (exception) {
     // danger! see https://github.com/joyent/node/issues/2582
     console.error("\nuncaughtException", exception);
   });
 
-  app.listen(process.env['NODE_ENV']=='production' ? 80 : 3000, function() {
+  app.listen(IS_PROD ? 8080 : 3000, function() {
     console.log("%s - Listening on port %d in %s mode", (new Date()).toISOString(), app.address().port, app.settings.env);
   });
 }
 
+if(!module.parent) {
+  up();
+}
+
 module.exports = {
+  up: up,
   app:app,
   kit:kit
 }
