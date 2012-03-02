@@ -3,21 +3,20 @@ var IS_PROD = process.env['NODE_ENV']=='production';
 /**
  * std libs
  */
- var express = require('express'),
-    _ = require('underscore'),
-    fs = require('fs'),
+ var express = require('express')
+   , fs = require('fs')
 
 /**
  * custom libs
  */
-    libMisc = require('./lib/misc.js'),
-    libMiddleware = require('./lib/middleware.js'),
+   , libMisc = require('./lib/misc.js')
+   , libMiddleware = require('./lib/middleware.js')
 
 /**
  * pkg info
  */
-    pkg = require('./package.json'),
-    pkgAuthor = libMisc.parsePerson(pkg.author);
+   , pkg = require('./package.json')
+   , pkgAuthor = libMisc.parsePerson(pkg.author)
 
 console.log("BOOTING UP "+pkg.name+" v"+pkg.version+" / node v"+process.versions.node+"...");
 
@@ -25,16 +24,24 @@ console.log("BOOTING UP "+pkg.name+" v"+pkg.version+" / node v"+process.versions
  * Kit
  */
 var kit = {
-  model: {},
-  dateformat: require('dateformat'),
-  secrets: require('./etc/secrets.js'),
-  parallelize: libMisc.parallelize,
-  middleware: libMiddleware.base
+    model: {}
+  , dateformat: require('dateformat')
+  , secrets: require('./etc/secrets.js')
+  , parallelize: libMisc.parallelize
+  , middleware: libMiddleware.base
 };
 
-var m = kit.secrets.get('mongoUrls'),
-  MONGO_SESS_URL = m.sess + (m.sess.charAt(m.sess.length-1)=='/' ? pkg.name + '-sess' : ''),
-  MONGO_DATA_URL = m.data + (m.data.charAt(m.data.length-1)=='/' ? pkg.name + '-data' : '');
+/**
+ * Underscore
+ */
+var _ = require('underscore');
+_.str = require('underscore.string');
+_.mixin(_.str.exports());
+kit.underscore = _;
+
+var m = kit.secrets.get('mongoUrls')
+  , MONGO_SESS_URL = m.sess + (m.sess.charAt(m.sess.length-1)=='/' ? pkg.name + '-sess' : '')
+  , MONGO_DATA_URL = m.data + (m.data.charAt(m.data.length-1)=='/' ? pkg.name + '-data' : '')
 
 /**
  * Sessions
@@ -43,9 +50,9 @@ var MongoStore = require('connect-mongodb');
 kit.sessionStorage = new MongoStore({ url: MONGO_SESS_URL });
 
 kit.middleware.session = express.session({
-  store: kit.sessionStorage,
-  secret: kit.secrets.get('sessionHash'),
-  cookie: { maxAge: 1000*60*60*24*7 } // one week
+    store: kit.sessionStorage
+  , secret: kit.secrets.get('sessionHash')
+  , cookie: { maxAge: 1000*60*60*24*7 } // one week
 });
 
 
@@ -55,7 +62,6 @@ kit.middleware.session = express.session({
 var mongoose = require('mongoose');
 mongoose.connect(MONGO_DATA_URL);
 
-
 /**
 * Schemas
 */
@@ -64,10 +70,11 @@ _.forEach(fs.readdirSync('./models'), function(file){
   if(file.match(/\.js$/)) {
     var s = require('./models/' + file);
     if(s.name) {
-      schemas[s.name] = s.get(mongoose);
+      schemas[s.name] = s.get(mongoose, kit);
     }
   }
 });
+mongoose.plugin(require('./lib/timestamps.js'));
 
 /**
 * Auth
@@ -108,7 +115,6 @@ _.forEach(schemas, function(schema, name){
    app.use(kit.middleware.session);
 
    app.use(function(req, res, next) {
-     var a = app.address();
      res.locals(
        { meta: { title: pkg.name
                , desc: pkg.description
@@ -177,7 +183,11 @@ function up() {
   });
 
   app.listen(IS_PROD ? 8080 : 3000, function() {
-    console.log("%s - Listening on port %d in %s mode", (new Date()).toISOString(), app.address().port, app.settings.env);
+    console.log( "%s - Listening on port %d in %s mode"
+    , (new Date()).toISOString()
+    , app.address().port
+    , app.settings.env
+    );
   });
 }
 
@@ -186,8 +196,8 @@ if(!module.parent) {
 }
 
 module.exports = {
-  up: up,
-  app:app,
-  kit:kit
+    up: up
+  , app: app
+  , kit: kit
 }
 

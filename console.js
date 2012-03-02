@@ -1,8 +1,7 @@
-var _ = require('underscore'),
-    repl = require('repl'),
-    boot = require('./testboot.js');
-
-var context = repl.start("JS> ").context;
+var boot = require('./testboot.js')
+  , repl = require('repl')
+  , context = repl.start("JS> ").context
+  , _ = boot.kit.underscore;
 
 context.__ = _;
 context.l = console.log;

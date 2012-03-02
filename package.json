@@ -2,7 +2,7 @@
   "name": "express-boilerplate",
   "author": "gaarf (/humans.txt)",
   "description": "Express/Mongo/Bootstrap boilerplate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "boot.js",
   "engines": {
     "node": "~0.6"
@@ -16,6 +16,7 @@
     "connect-mongodb": "*",
 
     "underscore": ">=1.1.6",
+    "underscore.string": ">=1.1.6",
     "dateformat": "*"
   },
   "devDependencies": {
